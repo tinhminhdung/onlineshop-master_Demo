@@ -1,0 +1,227 @@
+﻿@model Model.EF.News
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+
+    <script src="~/assets/jquery-1.7.1.min.js"></script>
+    <script src="~/assets/ckfinder/ckfinder.js"></script>
+    <script src="~/assets/ckeditor/ckeditor.js"></script>
+
+  
+
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+       
+        <div class="form-horizontal">
+            <h4>News</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(model => model.inid)
+            <h1 style="color:red;"> @ViewBag.ThongBao</h1>
+            <div class="form-group">
+                @Html.LabelFor(model => model.icid, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.icid, null, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.icid, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Brief, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Brief)
+                    @Html.ValidationMessageFor(model => model.Brief)
+                </div>
+            </div>
+            @Html.EditorFor(model => model.Contents)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Contents, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.TextArea("txtContent")*@
+                    <br />
+                    111
+                    @Html.TextBoxFor(model => model.Contents, new { htmlAttributes = new { @class = "form-control" }, id = "txtContent" })
+
+                    
+                    @Html.ValidationMessageFor(model => model.Contents)
+                </div>
+            </div>
+            <script>
+                CKEDITOR.replace("Body", { htmlEncodeOutput: true });
+            </script>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Images, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Images)*@
+                    @Html.TextBoxFor(model => model.Images, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
+                    <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                    @Html.ValidationMessageFor(model => model.Images)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImagesSmall, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImagesSmall)
+                    @Html.ValidationMessageFor(model => model.ImagesSmall)
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.New, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.New)
+                    @Html.ValidationMessageFor(model => model.New)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckBox1, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.CheckBox1)
+                    @Html.ValidationMessageFor(model => model.CheckBox1)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckBox2, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.CheckBox2)
+                    @Html.ValidationMessageFor(model => model.CheckBox2)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckBox3, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.CheckBox3)
+                    @Html.ValidationMessageFor(model => model.CheckBox3)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckBox4, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.CheckBox4)
+                    @Html.ValidationMessageFor(model => model.CheckBox4)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckBox5, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.CheckBox5)
+                    @Html.ValidationMessageFor(model => model.CheckBox5)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CheckBox6, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.CheckBox6)
+                    @Html.ValidationMessageFor(model => model.CheckBox6)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Titleseo, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Titleseo)
+                    @Html.ValidationMessageFor(model => model.Titleseo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Meta, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Meta)
+                    @Html.ValidationMessageFor(model => model.Meta)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Keyword, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Keyword)
+                    @Html.ValidationMessageFor(model => model.Keyword)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TangName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TangName)
+                    @Html.ValidationMessageFor(model => model.TangName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+
+        //var editor;
+        //function createEditor(languageCode, id) {
+        //    var editor = CKEDITOR.replace(id, {
+        //        language: languageCode
+        //    });
+        //}
+
+        //$(function () {
+        //    createEditor('vi', 'txtContent');
+
+        //});
+
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/assets/ckeditor/config.js',
+        });
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

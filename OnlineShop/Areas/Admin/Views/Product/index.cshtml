@@ -1,0 +1,93 @@
+﻿@*@model IEnumerable<Model.EF.Product>*@
+@model PagedList.IPagedList<Model.EF.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{
+    Danh sách sản phẩm
+}
+@section jsFooter{
+    <script src="/assets/admin/js/controller/ProductController.js"></script>
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    <div class="row form-group">
+        <div class="col-lg-12">
+            <div class="col-md-4">
+                <input type="text" value="@ViewBag.SearchString" class="form-control" name="searchString" />
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                <a class="btn btn-primary" href="/Admin/Product/Create">Thêm mới</a>
+            </div>
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            Ảnh
+        </th>
+        <th>
+            Tên
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Ngày tạo
+        </th>
+        <th>
+            Trạng thái
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.Raw(Common.MoreAll.Image(@item.Image.ToString()))
+                @*@Html.DisplayFor(modelItem => item.Image)*@
+            </td>
+            <td>
+                @Html.Raw(Common.MoreAll.FormatMoney(@item.Price.ToString()))
+                @*@Html.DisplayFor(modelItem => item.Price)*@
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.CreatedDate)*@
+                @Html.Raw(Common.MoreAll.FormatDate(@item.CreatedDate.ToString()))
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>*@
+            <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "<strong>Kích hoạt</strong>" : "Khoá")</a></td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>*@
+
+            <td>
+                <a href="/Admin/Product/Edit/@item.ID">Sửa</a>
+               |
+                @Html.ActionLink("Delete ok", "Delete", new { id = item.ID })
+               @* @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions
+    {
+        Confirm = "Bạn có muốn xoá bản ghi này?",
+        OnComplete = "$('#row_" + @item.ID + "').remove()",
+        HttpMethod = "Delete"
+    })*@
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
